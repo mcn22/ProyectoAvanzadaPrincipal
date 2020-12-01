@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ProyectoFinalCadenaHotelera.Models.Reserva>
+
+@{
+    ViewBag.Title = "Tus reservas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tus reservas</h2>
+
+<p>
+    @Html.ActionLink("Crear una reserva", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_llegada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_salida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.costo_total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.saldo_actual)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_llegada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_salida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.costo_total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.saldo_actual)
+        </td>
+        <td>
+            @Html.ActionLink("Detalles de la reserva", "DetalleReserva", new { id=item.ReservaId })
+        </td>
+    </tr>
+}
+
+</table>

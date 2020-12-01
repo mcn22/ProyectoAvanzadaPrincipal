@@ -1,0 +1,81 @@
+﻿@model ProyectoFinalCadenaHotelera.Models.Reserva
+
+@{
+    ViewBag.Title = "DetalleReserva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalle de la reserva</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoReserva.nombre_estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoReservaId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Habitacion.HabitacionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HabitacionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_llegada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_llegada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_salida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_salida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.costo_total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costo_total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.saldo_actual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.saldo_actual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoHabitacionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoHabitacionId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver", "ListaReservasUsuario")
+</p>

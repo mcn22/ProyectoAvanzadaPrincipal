@@ -1,7 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using ProyectoFinalCadenaHotelera.Models
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
@@ -22,10 +25,41 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Reservar", "Index", "Reserva")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    @{
+                        if (!User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Reservar", "Index", "Reserva")</li>
+                            <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                        }
+                        else
+                        {
+                            using (ApplicationDbContext db = new ApplicationDbContext())
+                            {
+                                var idUsuarioActual = User.Identity.GetUserId();
+                                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                                if (userManager.IsInRole(idUsuarioActual, "Administrador"))
+                                {
+                                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                                    <li>@Html.ActionLink("Lista de hoteles", "Index", "Admin")</li>
+                                }
+                                else if (userManager.IsInRole(idUsuarioActual, "Recepcionista"))
+                                {
+                                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                                    <li>@Html.ActionLink("Lista de reservas", "Index", "Reserva")</li>
+                                }
+                                else if (userManager.IsInRole(idUsuarioActual, "Cliente"))
+                                {
+                                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                                    <li>@Html.ActionLink("Reservar", "Index", "Reserva")</li>
+                                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                                }
+                            }
+                        }
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

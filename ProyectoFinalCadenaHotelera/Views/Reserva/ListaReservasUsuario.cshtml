@@ -13,38 +13,48 @@
 <table class="table">
     <tr>
         <th>
+            @Html.Label("Hotel")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Habitacion.TipoHabitacion.nombre_tipo)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.fecha_llegada)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fecha_salida)
+            @Html.Label("Días")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.costo_total)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.saldo_actual)
+            @Html.DisplayNameFor(model => model.EstadoReserva.nombre_estado)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha_llegada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha_salida)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.costo_total)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.saldo_actual)
-        </td>
-        <td>
-            @Html.ActionLink("Detalles de la reserva", "DetalleReserva", new { id=item.ReservaId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+         DateTime llegada = Convert.ToDateTime(item.fecha_llegada);
+         DateTime salida = Convert.ToDateTime(item.fecha_salida);
+         int dias = Convert.ToInt32((salida - llegada).TotalDays);
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Habitacion.Hotel.nombre_hotel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Habitacion.TipoHabitacion.nombre_tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_llegada)
+            </td>
+            <td>
+                @dias
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoReserva.nombre_estado)
+            </td>
+            <td>
+                @Html.ActionLink("Detalles de la reserva", "DetalleReserva", new { id = item.ReservaId })
+            </td>
+        </tr>
+    }
 
 </table>

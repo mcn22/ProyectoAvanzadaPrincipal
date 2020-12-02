@@ -123,38 +123,15 @@ namespace ProyectoFinalCadenaHotelera.Controllers
         public ActionResult ListaReservasUsuario()
         {
             var userId = HttpContext.User.Identity.GetUserId().ToString();
-            List<Reserva> listaFinalReservas = new List<Reserva>();
-            using (var ctx = new ApplicationDbContext())
-            {
-                var listaReservas = ctx.Reservas.Where(k => k.Id == userId);
-                foreach (var item in listaReservas)
-                {
-                    listaFinalReservas.Add(
-                        new Reserva
-                        {
-                            ReservaId = item.ReservaId,
-                            fecha_llegada = item.fecha_llegada,
-                            fecha_salida = item.fecha_salida,
-                            costo_total = item.costo_total,
-                            Id = item.Id,
-                            saldo_actual = item.saldo_actual,
-                            EstadoReservaId = item.EstadoReservaId,
-                            HabitacionId = item.HabitacionId,
-                            tipoHabitacionId = item.tipoHabitacionId                            
-                        }
-                    );
-                }
-            }
-            return View(listaFinalReservas);
+            var ctx = new ApplicationDbContext();
+            var listaReservas = ctx.Reservas.Where(k => k.Id == userId).ToList();
+            return View(listaReservas);
         }
 
         public ActionResult DetalleReserva(int ? id)
         {
-            Reserva reserva = new Reserva();
-            using (var ctx = new ApplicationDbContext())
-            {
-                reserva = ctx.Reservas.Where(k => k.ReservaId == id).FirstOrDefault();
-            }
+            var ctx = new ApplicationDbContext();
+            var reserva = ctx.Reservas.Where(k => k.ReservaId == id).FirstOrDefault();
             return View(reserva);
         }
 

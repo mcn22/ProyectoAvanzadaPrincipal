@@ -17,9 +17,9 @@ namespace ProyectoFinalCadenaHotelera.Models
         public int puntuacion { get; set; }
 
         public string Id { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public int HotelId { get; set; }
-        public Hotel Hotel { get; set; }
+        public virtual Hotel Hotel { get; set; }
     }
 }

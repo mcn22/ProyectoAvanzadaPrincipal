@@ -3,20 +3,39 @@
 @{
     ViewBag.Title = "DetalleReserva";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var idReserva = Model.ReservaId;
+    DateTime llegada = Convert.ToDateTime(Model.fecha_llegada);
+    DateTime salida = Convert.ToDateTime(Model.fecha_salida);
+    int dias = Convert.ToInt32((salida - llegada).TotalDays);
+    int diferencia = Model.costo_total - Model.saldo_actual;
 }
 
-<h2>DetalleReserva</h2>
+<h2>Detalle de la reserva [ID:@idReserva] </h2>
 
 <div>
-    <h4>Reserva</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.UserName)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.ApplicationUser.Nombre)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ApplicationUser.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.Apellido)
         </dd>
 
         <dt>
@@ -28,11 +47,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Habitacion.HabitacionId)
+            @Html.DisplayNameFor(model => model.Habitacion.num_habitacion)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Habitacion.HabitacionId)
+            @Html.DisplayFor(model => model.Habitacion.num_habitacion)
         </dd>
 
         <dt>
@@ -52,11 +71,27 @@
         </dd>
 
         <dt>
+            @Html.Label("Cantidad de días: ")
+        </dt>
+
+        <dd>
+            @dias
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.costo_total)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.costo_total)
+        </dd>
+
+        <dt>
+            @Html.Label("Pagado: ")
+        </dt>
+
+        <dd>
+            @diferencia
         </dd>
 
         <dt>
@@ -68,15 +103,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.tipoHabitacionId)
+            @Html.DisplayNameFor(model => model.Habitacion.TipoHabitacion.nombre_tipo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.tipoHabitacionId)
+            @Html.DisplayFor(model => model.Habitacion.TipoHabitacion.nombre_tipo)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver a la lista", "ListaReservasHotel", new { id = ViewBag.hotelId })
 </p>

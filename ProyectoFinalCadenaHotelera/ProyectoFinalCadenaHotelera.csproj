@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RecepcionController.cs" />
     <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,6 +191,10 @@
     <Compile Include="Migrations\202012011627298_Actualizacion_prueba.cs" />
     <Compile Include="Migrations\202012011627298_Actualizacion_prueba.Designer.cs">
       <DependentUpon>202012011627298_Actualizacion_prueba.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012021815155_Virtual para LazyLoading.cs" />
+    <Compile Include="Migrations\202012021815155_Virtual para LazyLoading.Designer.cs">
+      <DependentUpon>202012021815155_Virtual para LazyLoading.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -277,6 +282,8 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\ListaReservasHotel.cshtml" />
     <Content Include="Views\Admin\DetalleReserva.cshtml" />
+    <Content Include="Views\Recepcion\Index.cshtml" />
+    <Content Include="Views\Recepcion\DetalleReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011302142088_InitialCreate.resx">
@@ -290,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012011627298_Actualizacion_prueba.resx">
       <DependentUpon>202012011627298_Actualizacion_prueba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012021815155_Virtual para LazyLoading.resx">
+      <DependentUpon>202012021815155_Virtual para LazyLoading.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

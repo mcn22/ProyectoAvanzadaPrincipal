@@ -47,7 +47,7 @@
                                 else if (userManager.IsInRole(idUsuarioActual, "Recepcionista"))
                                 {
                                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                                    <li>@Html.ActionLink("Lista de reservas", "Index", "Reserva")</li>
+                                    <li>@Html.ActionLink("Lista de reservas", "Index", "Recepcion")</li>
                                 }
                                 else if (userManager.IsInRole(idUsuarioActual, "Cliente"))
                                 {

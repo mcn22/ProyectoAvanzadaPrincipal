@@ -38,52 +38,43 @@ namespace ProyectoFinalCadenaHotelera.Controllers
 
         public ActionResult ListaReservasHotel(int? id)
         {
+            ViewBag.idHotel = id;
             var userId = HttpContext.User.Identity.GetUserId().ToString();
             List<Reserva> listaFinalReservas = new List<Reserva>();
             //List<Habitacion> listaHabitaciones = new List<Habitacion>();
             //Reserva reserva = new Reserva();
             var listaReserva = new List<Reserva>();
-            using (var ctx = new ApplicationDbContext())
+            var ctx = new ApplicationDbContext();
+            var listaHabitaciones = ctx.Habitaciones.Where(k => k.HotelId == id).ToList();              
+            foreach (var item in listaHabitaciones)
             {
-                var listaHabitaciones = ctx.Habitaciones.Where(k => k.HotelId == id).ToList();              
-                foreach (var item in listaHabitaciones)
-                {
-                    if (item != null) {
-                        listaReserva.Add(ctx.Reservas.Where(j => j.HabitacionId == item.HabitacionId).FirstOrDefault());
-                    }
+                if (item != null) {
+                    var listaReservas = ctx.Reservas.Where(j => j.HabitacionId == item.HabitacionId).ToList();
+                    foreach (var reserva in listaReservas) {
+                        if (reserva != null)
+                        {
+                            listaReserva.Add(reserva);
+                        }
+                    }                  
+                }
                                
-                }
-                foreach (var itemReserva in listaReserva) {
-                    if (itemReserva != null) {
-                        listaFinalReservas.Add(
-                            new Reserva
-                            {
-                                ReservaId = itemReserva.ReservaId,
-                                fecha_llegada = itemReserva.fecha_llegada,
-                                fecha_salida = itemReserva.fecha_salida,
-                                costo_total = itemReserva.costo_total,
-                                Id = itemReserva.Id,
-                                saldo_actual = itemReserva.saldo_actual,
-                                EstadoReservaId = itemReserva.EstadoReservaId,
-                                HabitacionId = itemReserva.HabitacionId,
-                                tipoHabitacionId = itemReserva.tipoHabitacionId
-                            }
-                        );
-                    }
-                    
-                }
             }
+            foreach (var itemReserva in listaReserva) {
+                  if (itemReserva != null) {
+                        listaFinalReservas.Add(itemReserva);
+                  }
+                    
+            }
+            
             return View(listaFinalReservas);
         }
 
-        public ActionResult DetalleReserva(int? id)
+        public ActionResult DetalleReserva(int? id, int? idHotel)
         {
-            Reserva reserva = new Reserva();
-            using (var ctx = new ApplicationDbContext())
-            {
-                reserva = ctx.Reservas.Where(k => k.ReservaId == id).FirstOrDefault();
-            }
-            return View(reserva);
+            ViewBag.hotelID = idHotel;
+            var ctx = new ApplicationDbContext();
+            var reserva = ctx.Reservas.Where(k => k.ReservaId == id).FirstOrDefault();
+            return View(reserva);                 
         }
 
     }

@@ -9,6 +9,7 @@ namespace ProyectoFinalCadenaHotelera.Models
 
         [Key]
         [Column(TypeName = "numeric")]
+        [DisplayName("Id de reserva")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ReservaId { get; set; }
 
@@ -33,12 +34,12 @@ namespace ProyectoFinalCadenaHotelera.Models
 
         //foreign
         public int EstadoReservaId { get; set; }
-        public EstadoReserva EstadoReserva { get; set; }
+        public virtual EstadoReserva EstadoReserva { get; set; }
 
         public string Id { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public int HabitacionId { get; set; }
-        public Habitacion Habitacion { get; set; }
+        public virtual Habitacion Habitacion { get; set; }
     }
 }

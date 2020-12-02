@@ -17,10 +17,10 @@ namespace ProyectoFinalCadenaHotelera.Models
         public int num_habitacion { get; set; }
 
         public int TipoHabitacionId { get; set; }
-        public TipoHabitacion TipoHabitacion { get; set; }
+        public virtual TipoHabitacion TipoHabitacion { get; set; }
 
         public int HotelId { get; set; }
-        public  Hotel Hotel { get; set; }
+        public  virtual Hotel Hotel { get; set; }
 
         public List<Reserva> Reservas { get; set; }
     }

@@ -129,4 +129,4 @@ C:\Users\mcn_0\source\repos\ProyectoFinalCadenaHotelera\ProyectoFinalCadenaHotel
 C:\Users\mcn_0\source\repos\ProyectoFinalCadenaHotelera\ProyectoFinalCadenaHotelera\obj\Debug\ProyectoFinalCadenaHotelera.Migrations.Creacion_tablas_iniciales.resources
 C:\Users\mcn_0\source\repos\ProyectoFinalCadenaHotelera\ProyectoFinalCadenaHotelera\obj\Debug\ProyectoFinalCadenaHotelera.Migrations.Primeramigracionbase.resources
 C:\Users\mcn_0\source\repos\ProyectoFinalCadenaHotelera\ProyectoFinalCadenaHotelera\obj\Debug\ProyectoFinalCadenaHotelera.Migrations.Actualizacion_prueba.resources
-C:\Users\mcn_0\source\repos\ProyectoFinalCadenaHotelera\ProyectoFinalCadenaHotelera\obj\Debug\ProyectoFinalCadenaHotelera.csprojAssemblyReference.cache
+C:\Users\mcn_0\source\repos\ProyectoFinalCadenaHotelera\ProyectoFinalCadenaHotelera\obj\Debug\ProyectoFinalCadenaHotelera.Migrations.VirtualparaLazyLoading.resources

@@ -10,40 +10,49 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.fecha_llegada)
+            @Html.DisplayNameFor(model => model.ReservaId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fecha_salida)
+            @Html.DisplayNameFor(model => model.Habitacion.TipoHabitacion.nombre_tipo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.costo_total)
+            @Html.DisplayNameFor(model => model.ApplicationUser.UserName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.saldo_actual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Habitacion.num_habitacion)
         </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.fecha_llegada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fecha_salida)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.costo_total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.saldo_actual)
-            </td>
-            <td>
-                @Html.ActionLink("Detalles", "DetalleReserva", new { id = item.ReservaId }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.ReservaId })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReservaId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Habitacion.TipoHabitacion.nombre_tipo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.saldo_actual)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Habitacion.num_habitacion)
+    </td>
+    <td>
+        @Html.ActionLink("Detalles", "DetalleReserva", new { id = item.ReservaId, idHotel = ViewBag.idHotel }) |
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.ReservaId })
+    </td>
+</tr>
     }
 
 </table>
+<p>
+    @Html.ActionLink("Volver a la lista", "Index")
+</p>

@@ -4,39 +4,51 @@
     ViewBag.Title = "DetalleReserva";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var idReserva = Model.ReservaId;
-    DateTime llegada = Convert.ToDateTime(Model.fecha_llegada);
-    DateTime salida = Convert.ToDateTime(Model.fecha_salida);
-    int dias = Convert.ToInt32((salida - llegada).TotalDays);
-    int diferencia = Model.costo_total - Model.saldo_actual;
+    int dias = 0;
+    int diferencia = 0;
+    if (Model.EstadoReservaId != 3)
+    {
+        DateTime llegada = Convert.ToDateTime(Model.fecha_llegada);
+        DateTime salida = Convert.ToDateTime(Model.fecha_salida);
+        dias = Convert.ToInt32((salida - llegada).TotalDays);
+        diferencia = Model.costo_total - Model.saldo_actual;
+    }
+
 }
 
-<h2>Detalle de la reserva [ID:@idReserva] </h2>
+<h3>Detalle de la reserva #@idReserva </h3>
 
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.UserName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.UserName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.Nombre)
-        </dt>
+        @{
+            if (Model.EstadoReservaId != 3)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.ApplicationUser.UserName)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.Nombre)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.ApplicationUser.UserName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ApplicationUser.Nombre)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.Apellido)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ApplicationUser.Nombre)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.Apellido)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ApplicationUser.Apellido)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ApplicationUser.Apellido)
+                </dd>
+            }
+        }
 
         <dt>
             @Html.DisplayNameFor(model => model.EstadoReserva.nombre_estado)
@@ -46,72 +58,85 @@
             @Html.DisplayFor(model => model.EstadoReserva.nombre_estado)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Habitacion.num_habitacion)
-        </dt>
+        @{
+            if (Model.EstadoReservaId != 3)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.Habitacion.num_habitacion)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Habitacion.num_habitacion)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Habitacion.num_habitacion)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fecha_llegada)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.fecha_llegada)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fecha_llegada)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.fecha_llegada)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fecha_salida)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.fecha_salida)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fecha_salida)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.fecha_salida)
+                </dd>
 
-        <dt>
-            @Html.Label("Cantidad de días: ")
-        </dt>
+                <dt>
+                    @Html.Label("Cantidad de días: ")
+                </dt>
 
-        <dd>
-            @dias
-        </dd>
+                <dd>
+                    @dias
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.costo_total)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.costo_total)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.costo_total)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.costo_total)
+                </dd>
 
-        <dt>
-            @Html.Label("Pagado: ")
-        </dt>
+                <dt>
+                    @Html.Label("Pagado: ")
+                </dt>
 
-        <dd>
-            @diferencia
-        </dd>
+                <dd>
+                    @diferencia
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.saldo_actual)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.saldo_actual)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.saldo_actual)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.saldo_actual)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Habitacion.TipoHabitacion.nombre_tipo)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Habitacion.TipoHabitacion.nombre_tipo)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Habitacion.TipoHabitacion.nombre_tipo)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Habitacion.TipoHabitacion.nombre_tipo)
+                </dd>
+
+            }
+        }
 
     </dl>
+
+    @{
+        if (Model.EstadoReservaId != 3 && Model.EstadoReservaId != 2)
+        {
+        <h4>
+            @Html.ActionLink("Confirmar pago", "ConfirmarPago", new { id = Model.ReservaId })
+        </h4>
+        }
+    }
+
 </div>
-<p>
-    @Html.ActionLink("Volver a la lista", "Index")
-</p>

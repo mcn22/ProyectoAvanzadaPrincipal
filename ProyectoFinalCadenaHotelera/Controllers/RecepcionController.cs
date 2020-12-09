@@ -12,11 +12,26 @@ namespace ProyectoFinalCadenaHotelera.Controllers
     {
         public ActionResult Index()
         {
-            var ctx = new ApplicationDbContext();
-            var userId = HttpContext.User.Identity.GetUserId().ToString();
-            var hotelId = ctx.HotelEmpleados.Where(p => p.Id == userId).FirstOrDefault();
-            var listaReservas = ctx.Reservas.Where(k => k.Habitacion.HotelId == hotelId.HotelId).ToList();
-            return View(listaReservas);
+            return View();
+        }
+
+        [HttpPost, ActionName("Index")]
+        [ValidateAntiForgeryToken]
+        public ActionResult BuscaReservaId()
+        {
+            int idReserva = int.Parse(Request["ReservaId"]);
+            var idUsuario = HttpContext.User.Identity.GetUserId();
+            var ctx = new ApplicationDbContext();           
+            var hotelEmpleado = ctx.HotelEmpleados.Where(z => z.Id == idUsuario).FirstOrDefault();
+            var reserva = ctx.Reservas.Where(k => k.ReservaId == idReserva && k.Habitacion.HotelId == hotelEmpleado.HotelId).FirstOrDefault();
+            if (reserva != null)
+            {
+                return RedirectToAction("DetalleReserva", new { id = reserva.ReservaId });
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult DetalleReserva(int? id)
@@ -24,6 +39,32 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             var ctx = new ApplicationDbContext();
             var reserva = ctx.Reservas.Where(k => k.ReservaId == id).FirstOrDefault();
             return View(reserva);
+        }
+
+
+        public ActionResult ConfirmarPago(int? id)
+        {
+            var ctx = new ApplicationDbContext();
+            var reserva = ctx.Reservas.Where(k => k.ReservaId == id).FirstOrDefault();
+            return View(reserva);
+        }
+
+
+        [HttpPost, ActionName("ConfirmarPago")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmarPagoPost()
+        {
+            int idReserva = int.Parse(Request["ReservaId"]);
+            var ctx = new ApplicationDbContext();
+            var reserva = ctx.Reservas.Where(k => k.ReservaId == idReserva).FirstOrDefault();
+            if (reserva != null) {
+                reserva.saldo_actual = 0;
+                reserva.EstadoReservaId = 2;
+                ctx.Entry(reserva).State = System.Data.Entity.EntityState.Modified;
+                ctx.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

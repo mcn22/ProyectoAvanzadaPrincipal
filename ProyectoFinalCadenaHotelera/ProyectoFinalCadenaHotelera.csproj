@@ -173,6 +173,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RecepcionController.cs" />
     <Compile Include="Controllers\ReservaController.cs" />
+    <Compile Include="Controllers\ValoracionesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -282,8 +283,19 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\ListaReservasHotel.cshtml" />
     <Content Include="Views\Admin\DetalleReserva.cshtml" />
-    <Content Include="Views\Recepcion\Index.cshtml" />
+    <Content Include="Views\Recepcion\Index2.cshtml" />
     <Content Include="Views\Recepcion\DetalleReserva.cshtml" />
+    <Content Include="Views\Recepcion\ConfirmarPago.cshtml" />
+    <Content Include="Views\Admin\BusquedaReservaId.cshtml" />
+    <Content Include="Views\Admin\FiltroEstado.cshtml" />
+    <Content Include="Views\Admin\ListaPorTipo.cshtml" />
+    <Content Include="Views\Admin\AnulaReserva.cshtml" />
+    <Content Include="Views\Recepcion\Index.cshtml" />
+    <Content Include="Views\Valoraciones\Index.cshtml" />
+    <Content Include="Views\Valoraciones\_IngresaComentParcial.cshtml" />
+    <Content Include="Views\Valoraciones\_InfoHotelParcial.cshtml" />
+    <Content Include="Views\Valoraciones\Valoraciones.cshtml" />
+    <Content Include="Views\Valoraciones\Comentar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011302142088_InitialCreate.resx">

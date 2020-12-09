@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProyectoFinalCadenaHotelera.Models.Valoraciones>
+
+@{
+    ViewBag.Title = "Valoraciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var idHotel = ViewBag.Hotel.HotelId;
+}
+
+@Html.Partial("_InfoHotelParcial")
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.HiddenFor(Hotel => idHotel)
+        <div class="form-group">
+            <div class="col-md-4">
+                <input type="submit" value="Dejar mi comentario" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationUser.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hotel.nombre_hotel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comentario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.puntuacion)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hotel.nombre_hotel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comentario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.puntuacion)
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ProyectoFinalCadenaHotelera.Models.Reserva>
+
+@{
+    ViewBag.Title = "ListaPorTipo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de reservas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReservaId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Habitacion.TipoHabitacion.nombre_tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationUser.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.saldo_actual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Habitacion.num_habitacion)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Habitacion.TipoHabitacion.nombre_tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.saldo_actual)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Habitacion.num_habitacion)
+            </td>
+            <td>
+                @Html.ActionLink("Detalles", "DetalleReserva", new { id = item.ReservaId, idHotel = ViewBag.idHotel }) |
+                @Html.ActionLink("Anular", "AnulaReserva", new { id = item.ReservaId, idHotel = ViewBag.idHotel })
+            </td>
+        </tr>
+    }
+
+</table>

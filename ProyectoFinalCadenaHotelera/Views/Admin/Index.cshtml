@@ -39,7 +39,7 @@
             @Html.DisplayFor(modelItem => item.telefono_hotel)
         </td>
         <td>
-            @Html.ActionLink("Ver reservas", "ListaReservasHotel", new { id=item.HotelId }) 
+            @Html.ActionLink("Ver reservas", "FiltroEstado", new { id=item.HotelId }) 
         </td>
     </tr>
 }

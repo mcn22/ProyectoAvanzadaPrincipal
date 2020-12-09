@@ -1,0 +1,51 @@
+﻿@model ProyectoFinalCadenaHotelera.Models.Reserva
+
+@{
+    ViewBag.Title = "Confirmar Pago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Confirmar pago</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ReservaId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Habitacion.TipoHabitacion.nombre_tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Habitacion.TipoHabitacion.nombre_tipo, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Habitacion.num_habitacion, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Habitacion.num_habitacion, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.saldo_actual, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.saldo_actual, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Confirmar pago" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

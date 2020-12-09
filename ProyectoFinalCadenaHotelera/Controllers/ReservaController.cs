@@ -65,23 +65,76 @@ namespace ProyectoFinalCadenaHotelera.Controllers
                 string txtLlegada = Request["fecha_llegada"];
                 string txtsalida = Request["fecha_salida"];
                 int tipoHabitacion = int.Parse(Request["tipoHabitacionId"]);
+                int idHotel = int.Parse(Request["idHotel"]);
                 int costoTotal = CalculaCosto(diasDeHospedaje, tipoHabitacion);
 
-                reservaParcial.fecha_llegada = txtLlegada;
-                reservaParcial.fecha_salida = txtsalida;
-                reservaParcial.Id = HttpContext.User.Identity.GetUserId();
-                reservaParcial.tipoHabitacionId = tipoHabitacion;
-                reservaParcial.costo_total = costoTotal;
-                reservaParcial.EstadoReservaId = 1;
-                reservaParcial.HabitacionId = 2;//completar con el metodo que la trae validando la disponibilidad
-
-                return RedirectToAction("ConfirmarReserva", reservaParcial);
+                int idHabitacion = ValidaDisponibilidad(llegada, salida, idHotel, tipoHabitacion);
+                if (idHabitacion != 0)
+                {
+                    reservaParcial.fecha_llegada = txtLlegada;
+                    reservaParcial.fecha_salida = txtsalida;
+                    reservaParcial.Id = HttpContext.User.Identity.GetUserId();
+                    reservaParcial.tipoHabitacionId = tipoHabitacion;
+                    reservaParcial.costo_total = costoTotal;
+                    reservaParcial.EstadoReservaId = 1;
+                    reservaParcial.HabitacionId = idHabitacion;
+                    return RedirectToAction("ConfirmarReserva", reservaParcial);
+                }
+                else {
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
                 return RedirectToAction("../Account/Login");
             }
         }//fin del post de la prereserva
+
+
+        public static int ValidaDisponibilidad(DateTime llegada, DateTime salida, int idHotel, int tipoHabitacion)
+        {
+            int resultado = 0;
+            try
+            {
+                using (var ctx = new ApplicationDbContext())
+                {                   
+                    var listaHabitaciones = ctx.Habitaciones.Where(k => k.HotelId == idHotel && k.TipoHabitacionId == tipoHabitacion).ToList();
+                    foreach (var habitacion in listaHabitaciones)
+                    {
+                            var listaReservas = ctx.Reservas.Where(r => r.Habitacion.HabitacionId == habitacion.HabitacionId && r.EstadoReservaId != 3).ToList();
+                            if (listaReservas.Count == 0)
+                            {
+                                resultado = habitacion.HabitacionId;
+                                break;
+                            }
+                            else
+                            {
+                                foreach (var reserva in listaReservas)
+                                {
+
+                                    if (llegada >= Convert.ToDateTime(reserva.fecha_llegada) && llegada <= Convert.ToDateTime(reserva.fecha_salida) ||
+                                        salida >= Convert.ToDateTime(reserva.fecha_llegada) && salida <= Convert.ToDateTime(reserva.fecha_salida))
+                                    {
+                                        resultado = 0;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        resultado = habitacion.HabitacionId;
+                                    }
+
+                                }
+                            }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                resultado = 0;
+            }
+            return resultado;
+        }//fin de la validacion de la disponibilidad
+
 
         public ActionResult ConfirmarReserva(Reserva reservaParcial)
         {
@@ -110,6 +163,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             reserva.costo_total = costo_total;
             reserva.saldo_actual = costo_total - ((int)(costo_total * 0.30));
             reserva.tipoHabitacionId = id_Tipo;
+           
             if (CreaReserva(reserva))
             {
                 return RedirectToAction("ListaReservasUsuario");
@@ -118,6 +172,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             {
                 return RedirectToAction("PreReserva");
             }
+            
         }
 
         public ActionResult ListaReservasUsuario()

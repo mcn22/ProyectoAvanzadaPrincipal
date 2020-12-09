@@ -30,6 +30,7 @@
                         {
                             <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                             <li>@Html.ActionLink("Reservar", "Index", "Reserva")</li>
+                            <li>@Html.ActionLink("Valoraciones", "Index", "Valoraciones")</li>
                             <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                             <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                         }
@@ -42,24 +43,25 @@
                                 if (userManager.IsInRole(idUsuarioActual, "Administrador"))
                                 {
                                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                                    <li>@Html.ActionLink("Lista de hoteles", "Index", "Admin")</li>
+                                    <li>@Html.ActionLink("Reservas por hotel", "Index", "Admin")</li>
+                                    <li>@Html.ActionLink("Reservas por Id", "BusquedaReservaId", "Admin")</li>
                                 }
                                 else if (userManager.IsInRole(idUsuarioActual, "Recepcionista"))
                                 {
                                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                                    <li>@Html.ActionLink("Lista de reservas", "Index", "Recepcion")</li>
+                                    <li>@Html.ActionLink("Busqueda de reserva", "Index", "Recepcion")</li>
                                 }
                                 else if (userManager.IsInRole(idUsuarioActual, "Cliente"))
                                 {
                                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                                     <li>@Html.ActionLink("Reservar", "Index", "Reserva")</li>
+                                    <li>@Html.ActionLink("Valoraciones", "Index", "Valoraciones")</li>
                                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                                 }
                             }
                         }
                     }
-
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -1,0 +1,19 @@
+﻿<div>
+    @if (@ViewBag.Hotel != null)
+    {
+        <br />
+        <div class="row">
+            <div class="col-md-12 mt-2">
+                <div class="thumbnail">
+                    <h3>@ViewBag.Hotel.nombre_hotel</h3>
+                    <hr />
+                    <p style="width: 894px">@ViewBag.Hotel.descripcion_hotel</p>
+                    <div class="caption">
+                        <img src="../../img/hotel/@ViewBag.Hotel.imagen_hotel" alt="@ViewBag.Hotel.nombre_hotel">
+                        <p class="card-text"><small class="text-muted">@ViewBag.Hotel.ciudad_hotel, @ViewBag.Hotel.direccion_hotel. Teléfono: +506 @ViewBag.Hotel.telefono_hotel</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

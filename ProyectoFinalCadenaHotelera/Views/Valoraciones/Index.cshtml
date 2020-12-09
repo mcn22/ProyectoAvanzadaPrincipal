@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ProyectoFinalCadenaHotelera.Models.Hotel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Valoraciones de nuestros clientes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.imagen_hotel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_hotel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion_hotel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ciudad_hotel)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.imagen_hotel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_hotel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion_hotel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ciudad_hotel)
+            </td>
+            <td>
+                @Html.ActionLink("Ver comentarios", "Valoraciones", new { id = item.HotelId })
+            </td>
+        </tr>
+    }
+
+</table>

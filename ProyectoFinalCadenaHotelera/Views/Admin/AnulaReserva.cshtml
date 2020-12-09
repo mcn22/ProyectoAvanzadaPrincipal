@@ -1,0 +1,64 @@
+﻿@model ProyectoFinalCadenaHotelera.Models.Reserva
+
+@{
+    ViewBag.Title = "AnulaReserva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var idHotel = ViewBag.idHotel;
+}
+
+<h2>Anular reserva</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoReserva.nombre_estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoReserva.nombre_estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReservaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReservaId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_llegada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_llegada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.costo_total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costo_total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.saldo_actual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.saldo_actual)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ReservaId)
+        @Html.HiddenFor(hotel => idHotel)
+        <div class="form-actions no-color">
+            <input type="submit" value="Anular reserva" class="btn btn-primary" />
+        </div>
+    }
+</div>

@@ -32,9 +32,14 @@
 
     @foreach (var item in Model)
     {
-         DateTime llegada = Convert.ToDateTime(item.fecha_llegada);
-         DateTime salida = Convert.ToDateTime(item.fecha_salida);
-         int dias = Convert.ToInt32((salida - llegada).TotalDays);
+        var dias = "-";
+        var llegadaStr = "-";
+        if (item.EstadoReservaId != 3) {
+            llegadaStr = item.fecha_llegada.ToString();
+            DateTime llegada = Convert.ToDateTime(item.fecha_llegada);
+            DateTime salida = Convert.ToDateTime(item.fecha_salida);
+            dias = Convert.ToInt32((salida - llegada).TotalDays).ToString();
+        }
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Habitacion.Hotel.nombre_hotel)
@@ -43,7 +48,7 @@
                 @Html.DisplayFor(modelItem => item.Habitacion.TipoHabitacion.nombre_tipo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fecha_llegada)
+                @Html.DisplayFor(modelItem => llegadaStr)
             </td>
             <td>
                 @dias

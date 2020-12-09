@@ -1,0 +1,49 @@
+﻿@model ProyectoFinalCadenaHotelera.Models.EstadoReserva
+
+@{
+    ViewBag.Title = "FiltroEstado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var idHotel = ViewBag.idHotel;
+}
+
+@{
+    List<SelectListItem> listaEstadosDropDown = new List<SelectListItem>();
+    foreach (var item in ViewBag.ListaEstados)
+    {
+        listaEstadosDropDown.Add(new SelectListItem
+        {
+            Text = item.nombre_estado,
+            Value = item.EstadoReservaId.ToString()
+        });
+    }
+}
+
+<h2>Selecciona el estado de la reserva</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(hotelId => idHotel)
+    <div class="form-group">
+        @Html.LabelFor(model => model.nombre_estado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.EstadoReservaId, listaEstadosDropDown, "-- Seleccionar --")
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Buscar" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

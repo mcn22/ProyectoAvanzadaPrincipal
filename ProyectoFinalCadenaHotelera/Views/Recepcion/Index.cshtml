@@ -1,63 +1,32 @@
-﻿@model IEnumerable<ProyectoFinalCadenaHotelera.Models.Reserva>
+﻿@model ProyectoFinalCadenaHotelera.Models.Reserva
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Busqueda de reservas</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationUser.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReservaId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Habitacion.num_habitacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha_llegada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha_salida)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.saldo_actual)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReservaId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Habitacion.num_habitacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha_llegada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha_salida)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.saldo_actual)
-        </td>
-        <td>
-            @Html.ActionLink("Detalle", "DetalleReserva", new { id = item.ReservaId, idHotel = ViewBag.idHotel }) |
-            @Html.ActionLink("Confirmar pago", "Edit", new { id = item.ReservaId })
-        </td>
-    </tr>
+    <div class="form-horizontal">
+        <hr />
+        <h4>Busqueda de por Id</h4>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReservaId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.ReservaId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReservaId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-1">
+                <input type="submit" value="Buscar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
 }
 
-</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

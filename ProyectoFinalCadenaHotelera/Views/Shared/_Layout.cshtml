@@ -21,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Natural Connection", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -45,6 +45,8 @@
                                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                                     <li>@Html.ActionLink("Reservas por hotel", "Index", "Admin")</li>
                                     <li>@Html.ActionLink("Reservas por Id", "BusquedaReservaId", "Admin")</li>
+                                    <li>@Html.ActionLink("Gestion de empleados", "GestionEmpleados", "Admin")</li>
+                                    <li>@Html.ActionLink("Valoraciones", "Index", "Valoraciones")</li>
                                 }
                                 else if (userManager.IsInRole(idUsuarioActual, "Recepcionista"))
                                 {
@@ -71,7 +73,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+            <p> Natural Connection  @DateTime.Now.Year &copy;</p>
         </footer>
     </div>
 

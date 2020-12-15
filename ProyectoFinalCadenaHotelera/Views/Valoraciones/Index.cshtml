@@ -5,44 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Valoraciones de nuestros clientes</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.imagen_hotel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre_hotel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion_hotel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ciudad_hotel)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.imagen_hotel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre_hotel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.descripcion_hotel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ciudad_hotel)
-            </td>
-            <td>
-                @Html.ActionLink("Ver comentarios", "Valoraciones", new { id = item.HotelId })
-            </td>
-        </tr>
-    }
-
-</table>
+<div class="row">
+    <div class="col-md-12 mt-3">
+        <h2>Selecciona el hotel para ver las opiniones de nuestros clientes</h2>
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-md-4 mt-2">
+                <div class="thumbnail">
+                    <img class="img-responsive" src="../../img/hotel/@Html.DisplayFor(modelItem => item.imagen_hotel)" alt="Hotel @Html.DisplayFor(modelItem => item.nombre_hotel)">
+                    <div class="caption">
+                        <h3>@Html.DisplayFor(modelItem => item.nombre_hotel)</h3>
+                        <p> @Html.DisplayFor(modelItem => item.descripcion_hotel)</p>
+                        <p>Ubicado en @Html.DisplayFor(modelItem => item.ciudad_hotel)</p>
+                        <button class="btn btn-primary">
+                            @Html.ActionLink("Ver comentarios", "Valoraciones", new { id = item.HotelId }, new { @class = "text-white" })
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -6,6 +6,8 @@
     var idHotel = 0;
 }
 
+
+
 @{
     List<SelectListItem> listaTipoHabitacionDropDown = new List<SelectListItem>();
     foreach (var item in ViewBag.ListaTipos)
@@ -27,9 +29,9 @@
             <div class="thumbnail">
                 <h3>@ViewBag.Hotel.nombre_hotel</h3>
                 <hr />
-                <p style="width: 894px">@ViewBag.Hotel.descripcion_hotel</p>
+                <p>@ViewBag.Hotel.descripcion_hotel</p>
                 <div class="caption">
-                    <img src="../../img/hotel/@ViewBag.Hotel.imagen_hotel" alt="@ViewBag.Hotel.nombre_hotel">
+                    <img class="img-responsive" src="../../img/hotel/banner-@ViewBag.Hotel.imagen_hotel" alt="@ViewBag.Hotel.nombre_hotel">
                     <p class="card-text"><small class="text-muted">@ViewBag.Hotel.ciudad_hotel, @ViewBag.Hotel.direccion_hotel. Teléfono: +506 @ViewBag.Hotel.telefono_hotel</small></p>
                 </div>
             </div>
@@ -45,7 +47,7 @@
         {
             <div class="col-sm-6 col-md-4 mt-2">
                 <div class="thumbnail">
-                    <img src="../../img/habitacion/@item.imagen_tipo" alt="Tipo de habitacion @item.nombre_tipo">
+                    <img class="img-responsive" src="../../img/habitacion/@item.imagen_tipo" alt="Tipo de habitacion @item.nombre_tipo">
                     <div class="caption">
                         <h3>@item.nombre_tipo</h3>
                         <p>@item.descripcion_tipo</p>
@@ -61,44 +63,42 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-<div class="form-horizontal thumbnail">
-    <br />
-    <h4>Completa los siguientes datos:</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.fecha_llegada, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.fecha_llegada, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-            @Html.ValidationMessageFor(model => model.fecha_llegada, "", new { @class = "text-danger" })
+    <div class="form-horizontal thumbnail">
+        <br />
+        <h4>Completa los siguientes datos:</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.fecha_llegada, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fecha_llegada, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.fecha_llegada, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.fecha_salida, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.fecha_salida, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-            @Html.ValidationMessageFor(model => model.fecha_salida, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.fecha_salida, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fecha_salida, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.fecha_salida, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.tipoHabitacionId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.tipoHabitacionId, listaTipoHabitacionDropDown, "-- Seleccionar --")
+        <div class="form-group">
+            @Html.LabelFor(model => model.Habitacion.TipoHabitacion.nombre_tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.tipoHabitacionId, listaTipoHabitacionDropDown, "-- Seleccionar --")
+            </div>
         </div>
-    </div>
 
-    @Html.HiddenFor(Hotel => idHotel)
+        @Html.HiddenFor(Hotel => idHotel)
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Validar disponibilidad" class="btn btn-primary" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Continuar" class="btn btn-primary" />
+            </div>
         </div>
+
     </div>
-</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

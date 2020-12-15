@@ -9,6 +9,7 @@ using System.Data.Entity;
 
 namespace ProyectoFinalCadenaHotelera.Controllers
 {
+
     public class ReservaController : Controller
     {
         public ActionResult Index()
@@ -41,7 +42,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             List<TipoHabitacion> listaTiposHabitacion = new List<TipoHabitacion>();
             listaTiposHabitacion = listarTiposHabitacion();
             ViewBag.ListaTipos = listaTiposHabitacion.ToList();
-
+                        
             using (var ctx = new ApplicationDbContext())
             {
                 var hotel = ctx.Hoteles.Where(h => h.HotelId == id).FirstOrDefault();
@@ -57,7 +58,6 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             if (Request.IsAuthenticated)
             {
                 Reserva reservaParcial = new Reserva();
-
                 DateTime llegada = Convert.ToDateTime(Request["fecha_llegada"]);
                 DateTime salida = Convert.ToDateTime(Request["fecha_salida"]);
                 int diasDeHospedaje = DiasHospedaje(llegada, salida);
@@ -81,7 +81,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
                     return RedirectToAction("ConfirmarReserva", reservaParcial);
                 }
                 else {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("PreReserva", new { id = idHotel});                  
                 }
             }
             else
@@ -89,7 +89,6 @@ namespace ProyectoFinalCadenaHotelera.Controllers
                 return RedirectToAction("../Account/Login");
             }
         }//fin del post de la prereserva
-
 
         public static int ValidaDisponibilidad(DateTime llegada, DateTime salida, int idHotel, int tipoHabitacion)
         {
@@ -136,10 +135,12 @@ namespace ProyectoFinalCadenaHotelera.Controllers
         }//fin de la validacion de la disponibilidad
 
 
+        [Authorize(Roles = "Cliente")]
         public ActionResult ConfirmarReserva(Reserva reservaParcial)
         {
             return View();
         }
+
 
         [HttpPost, ActionName("ConfirmarReserva")]
         [ValidateAntiForgeryToken]
@@ -148,7 +149,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             string txtLlegada = Request["fecha_llegada"];
             string txtSalida = Request["fecha_salida"];
             string UserId_reserva = (Request["Id"]);
-            int id_habitacion_reserva = int.Parse(Request["HabitacionId"]);
+             int id_habitacion_reserva = int.Parse(Request["HabitacionId"]);
             int estado_reserva = int.Parse(Request["EstadoReservaId"]);
             int costo_total = int.Parse(Request["costo_total"]);
             int id_Tipo = int.Parse(Request["tipoHabitacionId"]);
@@ -175,6 +176,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             
         }
 
+        [Authorize(Roles = "Cliente")]
         public ActionResult ListaReservasUsuario()
         {
             var userId = HttpContext.User.Identity.GetUserId().ToString();
@@ -183,6 +185,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             return View(listaReservas);
         }
 
+        [Authorize(Roles = "Cliente")]
         public ActionResult DetalleReserva(int ? id)
         {
             var ctx = new ApplicationDbContext();

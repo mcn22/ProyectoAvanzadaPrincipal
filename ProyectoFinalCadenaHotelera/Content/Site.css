@@ -22,3 +22,68 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.mt-2 {
+    margin-top: 2%;
+}
+
+.mt-3 {
+   margin-top: 3%;
+ }
+
+.banner-area {
+    background: url(../img/imagenBanner.jpg) center;
+    background-size: cover;
+}
+
+.banner-area .overlay-bg {
+        background: rgba(2, 6, 11, 0.4);
+}
+
+@media (max-width: 767px) {
+    .banner-area .fullscreen {
+        height: auto !important;
+    }
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.relative {
+    position: relative;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.banner {
+height:350px;
+}
+
+.paddingTextoBanner {
+padding: 50px 0px 0px 60px;
+}
+
+.glyphicon-star {
+    color: gold;
+}
+
+.star-off {
+    color: darkgray;
+}
+
+.center {
+margin: auto;
+align-content: center;
+align-self:center;
+}
+
+.borde {
+border: 2px solid black;
+}

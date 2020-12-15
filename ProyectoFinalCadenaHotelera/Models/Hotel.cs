@@ -15,7 +15,7 @@ namespace ProyectoFinalCadenaHotelera.Models
 
         [Required]
         [StringLength(150)]
-        [DisplayName("Nombre")]
+        [DisplayName("Nombre del hotel")]
         public string nombre_hotel { get; set; }
 
         [Required]

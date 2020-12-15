@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ProyectoFinalCadenaHotelera.Controllers
 {
+    [Authorize(Roles = "Recepcionista")]
     public class RecepcionController : Controller
     {
         public ActionResult Index()

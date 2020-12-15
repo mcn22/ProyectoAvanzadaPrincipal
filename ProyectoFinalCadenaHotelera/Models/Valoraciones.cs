@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoFinalCadenaHotelera.Models
@@ -11,9 +12,12 @@ namespace ProyectoFinalCadenaHotelera.Models
         public int ValoracionesId { get; set; }
 
         [Required]
+        [DisplayName("Comentario")]
         public string comentario { get; set; }
 
         [Column(TypeName = "numeric")]
+        [Required]
+        [DisplayName("Puntuación")]
         public int puntuacion { get; set; }
 
         public string Id { get; set; }

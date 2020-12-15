@@ -2,30 +2,55 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<section class="banner-area relative mt-3">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row fullscreen align-items-center justify-content-between">
+            <div class="col-lg-8 col-md-6 banner-left banner paddingTextoBanner">
+                <h1 class="text-white">Comodidad a tu alcance</h1>
+                <p class="text-white">
+                    La comodidad y la calidad no tiene por qué ser algo para unos pocos. </br>
+                    La conexión con la naturaleza que buscas
+                    está en un sólo lugar.
+                </p>
+                <button class="btn btn-primary btn-lg">
+                    @Html.ActionLink("Haz tu reserva", "Index", "Valoraciones", new { @class = "text-white"})
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Valoraciones de nuestros clientes</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            Parte del éxito es la transparencia, es por ello que nos tomamos muy en serio los comentarios de nuestros clientes
+            para continuar mejorando y ofrecer la calidad que todos merecen.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <button class="btn btn-default">
+            @Html.ActionLink("Valoraciones", "Index", "Valoraciones")
+        </button>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Da un vistazo a la historia</h2>
+        <p>Conoce nuestra historia y hacia dónde apuntan nuestros anhelos de mejora.</p>
+        <button class="btn btn-default">
+            @Html.ActionLink("Conócenos", "About", "Home")
+        </button>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    @{
+        if (!User.Identity.IsAuthenticated)
+        {
+            <div class="col-md-4">
+                <h2>Cuenta personal</h2>
+                <p>Puedes crear tu cuenta de una manera muy sencilla, con ella puedes reservar y crear tus propias valoraciones.</p>
+                <button class="btn btn-default">
+                    @Html.ActionLink("Regístrate", "Register", "Account")
+                </button>
+            </div>
+        }
+    }
+
 </div>
+

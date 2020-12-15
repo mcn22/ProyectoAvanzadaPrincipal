@@ -43,5 +43,7 @@ namespace ProyectoFinalCadenaHotelera.Models
         {
             return new ApplicationDbContext();
         }
+
+        //public System.Data.Entity.DbSet<ProyectoFinalCadenaHotelera.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

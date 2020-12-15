@@ -46,8 +46,12 @@
                 @Html.DisplayFor(modelItem => item.Habitacion.num_habitacion)
             </td>
             <td>
-                @Html.ActionLink("Detalles", "DetalleReserva", new { id = item.ReservaId, idHotel = ViewBag.idHotel }) |
-                @Html.ActionLink("Anular", "AnulaReserva", new { id = item.ReservaId, idHotel = ViewBag.idHotel })
+                @Html.ActionLink("Detalles", "DetalleReserva", new { id = item.ReservaId, idHotel = ViewBag.idHotel })
+                @{
+                    
+                if (item.EstadoReservaId != 3)
+                { @Html.ActionLink("| Anular", "AnulaReserva", new { id = item.ReservaId, idHotel = ViewBag.idHotel })}
+                }
             </td>
         </tr>
     }

@@ -131,3 +131,16 @@
     </dl>
 </div>
 
+
+<div class="row">
+    <div class="col-md-2">
+        @{
+            if (Model.EstadoReservaId != 3)
+            {
+                @Html.ActionLink("Anular", "AnulaReserva", new { id = Model.ReservaId, idHotel = Model.Habitacion.HotelId })
+
+            }
+        }
+    </div>
+<div/>
+

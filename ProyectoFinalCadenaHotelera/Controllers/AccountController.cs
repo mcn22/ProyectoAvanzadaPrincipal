@@ -161,8 +161,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     using (ApplicationDbContext db = new ApplicationDbContext())
                     {
-                        var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-                        var resultado = userManager.AddToRole(user.Id, "Cliente");
+                        var resultado = UserManager.AddToRole(user.Id, "Cliente");
                     }
 
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771

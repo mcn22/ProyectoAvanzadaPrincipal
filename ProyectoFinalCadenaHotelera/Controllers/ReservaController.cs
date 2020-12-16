@@ -81,6 +81,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
                     return RedirectToAction("ConfirmarReserva", reservaParcial);
                 }
                 else {
+                    TempData["Mensaje"] = "No hay disponibilidad actualmente.";
                     return RedirectToAction("PreReserva", new { id = idHotel});                  
                 }
             }
@@ -265,4 +266,4 @@ namespace ProyectoFinalCadenaHotelera.Controllers
         }
 
     }//fin de la clase
-}//fin del namespace
+}//fin del namespace 70126122

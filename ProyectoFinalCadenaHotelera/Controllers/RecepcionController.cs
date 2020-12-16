@@ -31,7 +31,8 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             }
             else
             {
-                return View();
+                TempData["Mensaje"] = "La reserva buscada no existe o se encuentra en otro hotel.";
+                return RedirectToAction("Index");
             }
         }
 

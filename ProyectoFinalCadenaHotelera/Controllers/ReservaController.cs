@@ -136,7 +136,6 @@ namespace ProyectoFinalCadenaHotelera.Controllers
         }//fin de la validacion de la disponibilidad
 
 
-        [Authorize(Roles = "Cliente")]
         public ActionResult ConfirmarReserva(Reserva reservaParcial)
         {
             return View();
@@ -177,7 +176,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             
         }
 
-        [Authorize(Roles = "Cliente")]
+
         public ActionResult ListaReservasUsuario()
         {
             var userId = HttpContext.User.Identity.GetUserId().ToString();
@@ -186,7 +185,7 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             return View(listaReservas);
         }
 
-        [Authorize(Roles = "Cliente")]
+
         public ActionResult DetalleReserva(int ? id)
         {
             var ctx = new ApplicationDbContext();

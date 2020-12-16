@@ -156,14 +156,11 @@ namespace ProyectoFinalCadenaHotelera.Controllers
             {
                 var user = new ApplicationUser { Nombre = model.Nombre, Apellido = model.Apellido, UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (result.Succeeded && UserManager.AddToRole(user.Id, "Cliente").Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    using (ApplicationDbContext db = new ApplicationDbContext())
-                    {
-                        var resultado = UserManager.AddToRole(user.Id, "Cliente");
-                    }
-
+                    
+                    
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
